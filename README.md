@@ -23,13 +23,13 @@ Lancer le serveur
 `npm run start`
 
 ## Stack
-- Node.js
-- Express
-- Axios
-- HTML
-- CSS
-- Javascript
-- Jest
+- Node.js // serveur
+- Express // framework pour le serveur (gestion des routes)
+- Axios // pour faire les requêtes HTTP (API OMBD)
+- HTML // pages
+- CSS // styles des pages
+- Javascript // dynamisme des pages
+- Jest // pour les tests unitaires de l'API OMBD
 
 ## Tests
 Utiliser les tests utilitaires (via jest et contenu dans ./tests/)
