@@ -35,7 +35,8 @@ Lancer le serveur
 Utiliser les tests utilitaires (via jest et contenu dans ./tests/)
 > [!TIP]
 > Pour lancer les tests, il faut configurer votre api key de l'api OMBD dans le fichier .env
-`npm test`
+> 
+> Enfin executer `npm test`
 
 ## Documentation
 - [Documentation de l'api OMBD](https://www.omdbapi.com/)
