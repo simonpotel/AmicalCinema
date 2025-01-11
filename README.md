@@ -12,6 +12,13 @@ Pour atteindre cet objectif, les gérants du cinéma décident de vous missionne
 Installer les modules 
 `npm install`
 
+Configurer votre api key de l'api OMBD:
+./env : 
+```
+OMDB_API_KEY=VOTRE_API_KEY
+```
+
+
 Lancer le serveur
 `npm run start`
 
@@ -22,3 +29,17 @@ Lancer le serveur
 - HTML
 - CSS
 - Javascript
+- Jest
+
+## Tests
+Utiliser les tests utilitaires (via jest et contenu dans ./tests/)
+> [!TIP]
+> Pour lancer les tests, il faut configurer votre api key de l'api OMBD dans le fichier .env
+`npm test`
+
+## Documentation
+- [Documentation de l'api OMBD](https://www.omdbapi.com/)
+- Documentation du projet disponible via fichiers `README.md`.
+
+## Conventions d'écriture
+- Code en anglais et commentaires en français.
