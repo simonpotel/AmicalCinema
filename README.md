@@ -30,6 +30,7 @@ Lancer le serveur
 - CSS // styles des pages
 - Javascript // dynamisme des pages
 - Jest // pour les tests unitaires de l'API OMBD
+- dotenv // pour les variables d'environnement ./env
 
 ## Tests
 Utiliser les tests utilitaires (via jest et contenu dans ./tests/)
