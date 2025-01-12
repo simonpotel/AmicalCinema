@@ -1,0 +1,32 @@
+header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--background-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+header a {
+  display: flex;
+  align-items: center;
+}
+
+header img {
+  height: 40px;
+}
+
+input {
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  width: 300px;
+  border: 1.2px solid var(--color-grey);
+  border-radius: 20px;
+}
+
+input::placeholder {
+  color: var(--color-secondary);
+}

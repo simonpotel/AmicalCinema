@@ -1,0 +1,15 @@
+:root {
+  --color-primary: #e77408;
+  --color-secondary: #381d2a;
+  --color-tertiary: #fcde9c;
+  --color-quaternary: #ba5624;
+  --color-accent: #c4d6b0;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey: #f1f2f6;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
