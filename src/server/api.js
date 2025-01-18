@@ -1,6 +1,6 @@
 const axios = require('axios'); // module for HTTP requests
 const Cache = require('./apiCache'); // cache module for OMBD API
-const CACHE_SIZE = 50; // cache size max
+const CACHE_SIZE = process.env.CACHE_SIZE; // cache size max
 
 if (!process.env.OMDB_API_KEY) {
     throw new Error('Please define OMDB_API_KEY');
@@ -8,7 +8,6 @@ if (!process.env.OMDB_API_KEY) {
 
 const API_KEY = process.env.OMDB_API_KEY; // key API OMBD
 const BASE_URL = 'http://www.omdbapi.com/'; // base URL API OMBD
-
 
 class ombdAPI {
     constructor() {

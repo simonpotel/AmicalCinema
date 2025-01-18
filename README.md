@@ -12,10 +12,11 @@ Pour atteindre cet objectif, les gérants du cinéma décident de vous missionne
 Installer les modules 
 `npm install`
 
-Configurer votre api key de l'api OMBD:
+Configurer votre api key de l'api OMBD, ainsi que la taille du cache:
 ./env : 
 ```
 OMDB_API_KEY=VOTRE_API_KEY
+CACHE_SIZE=50
 ```
 
 
