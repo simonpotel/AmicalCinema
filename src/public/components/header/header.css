@@ -20,12 +20,39 @@ header img {
   height: 75px;
 }
 
-input {
+.search-container {
+  position: relative;
   margin: 0 auto;
-  padding: 0.5rem 1rem;
-  width: 300px;
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
   border: 1.2px solid var(--color-grey);
   border-radius: 20px;
+  font-size: 1rem;
+}
+
+.search-button {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+  transition: color 0.3s ease;
+}
+
+.search-button:hover {
+  color: var(--color-primary);
 }
 
 input::placeholder {
