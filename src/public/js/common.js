@@ -1,4 +1,9 @@
+let resourcesLoaded = false;
+
 function loadCommonResources() {
+  if (resourcesLoaded) return Promise.resolve();
+  resourcesLoaded = true;
+
   const head = document.head;
 
   // function to initialize resources
@@ -59,6 +64,7 @@ function loadCommonResources() {
       smoothScrollScript.src = "/components/smoothScroll/smoothScroll.js";
       smoothScrollScript.onload = () => {
         window.smoothScroll = createSmoothScroll();
+        window.lenis = window.smoothScroll.getLenis();
         resolve();
       };
       document.body.appendChild(smoothScrollScript);
@@ -85,7 +91,12 @@ function loadCommonResources() {
     });
   }
 
-  initializeResources(); // load the common resources on the page
+  return new Promise((resolve) => {
+    initializeResources();
+    resolve();
+  });
 }
 
-document.addEventListener("DOMContentLoaded", loadCommonResources); // after DOM loaded, load the common resources
+window.loadCommonResources = loadCommonResources;
+
+loadCommonResources();
