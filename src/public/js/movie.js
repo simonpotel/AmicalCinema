@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search); // get query params
   const movieId = urlParams.get("id"); // get movie id
+  const movieContent = document.querySelector('.movie-content');
+  const loader = document.getElementById('loader');
 
   if (!movieId) {
     window.location.href = "/"; // if no movie id, redirect to index page
@@ -53,6 +55,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       dvdElement.textContent = "N/A"; // if no dvd date, set text to empty
     }
+
+    loader.style.display = 'none';
+    movieContent.style.display = 'grid';
 
     gsap.from(".movie-content", {
       opacity: 0,

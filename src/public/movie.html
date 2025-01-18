@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amical Cinéma</title>
     <link rel="icon" href="/assets/logo.svg" />
+    <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/movie.css" />
   </head>
   <body>
     <div id="movie-container">
-      <div class="movie-content">
+      <div id="loader" class="loader">
+        <div class="spinner"></div>
+      </div>
+      <div class="movie-content" style="display: none;">
         <div class="movie-poster">
           <img id="poster" src="" alt="Movie Poster" />
         </div>
