@@ -5,7 +5,7 @@ window.createHeader = () => {
   const logoContainer = document.createElement("a");
   logoContainer.href = "./";
   const logo = document.createElement("img");
-  logo.src = "/assets/logo.png";
+  logo.src = "/assets/logo.svg";
   logo.alt = "monCine Logo";
   logoContainer.appendChild(logo);
 

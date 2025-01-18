@@ -3,14 +3,14 @@ function loadCommonResources() {
 
   // function to initialize resources
   const initializeResources = () => {
-    // Google Fonts
+    // Google Font Space Grotesk
     const fontsCssLink = document.createElement("link");
     fontsCssLink.rel = "stylesheet";
     fontsCssLink.href =
       "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap";
     head.appendChild(fontsCssLink);
 
-    // Common CSS
+    // Common CSS for every page
     const commonCssLink = document.createElement("link");
     commonCssLink.rel = "stylesheet";
     commonCssLink.href = "/css/common.css";
@@ -20,6 +20,7 @@ function loadCommonResources() {
   };
 
   function loadSmoothScroll() {
+    // Smooth Scroll 
     return new Promise((resolve) => {
       const smoothScrollCssLink = document.createElement("link");
       smoothScrollCssLink.rel = "stylesheet";
@@ -38,13 +39,13 @@ function loadCommonResources() {
 
   function loadHeader() {
     return new Promise((resolve) => {
-      // CSS
+      // Header css
       const headerCssLink = document.createElement("link");
       headerCssLink.rel = "stylesheet";
       headerCssLink.href = "/components/header/header.css";
       head.appendChild(headerCssLink);
 
-      // JS
+      // Header js
       const headerScript = document.createElement("script");
       headerScript.src = "/components/header/header.js";
       headerScript.onload = () => {
@@ -56,7 +57,7 @@ function loadCommonResources() {
     });
   }
 
-  initializeResources();
+  initializeResources(); // load the common resources on the page
 }
 
-document.addEventListener("DOMContentLoaded", loadCommonResources);
+document.addEventListener("DOMContentLoaded", loadCommonResources); // after DOM loaded, load the common resources
