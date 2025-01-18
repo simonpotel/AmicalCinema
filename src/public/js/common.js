@@ -22,28 +22,28 @@ function loadCommonResources() {
     head.appendChild(commonCssLink);
 
     // add loading class to body (so we got a fluid transition between pages)
-    document.body.classList.add('loading');
+    document.body.classList.add("loading");
 
     Promise.all([
       loadSmoothScroll(), // load smooth scroll
       loadHeader(), // load header
-      new Promise(resolve => {
-        if (document.readyState === 'complete') {
+      new Promise((resolve) => {
+        if (document.readyState === "complete") {
           resolve(); // resolve promise
         } else {
-          window.addEventListener('load', resolve); // if not complete, wait for load event
+          window.addEventListener("load", resolve); // if not complete, wait for load event
         }
-      })
+      }),
     ]).then(() => {
       // everything loaded, remove loading class
-      document.body.classList.remove('loading');
+      document.body.classList.remove("loading");
 
       // if we are on search page, get query from url and set it to search bar
-      if (window.location.pathname === '/search.html') {
+      if (window.location.pathname === "/search.html") {
         const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('query');
+        const query = urlParams.get("query");
         if (query) {
-          const searchBar = document.querySelector('header .search-bar');
+          const searchBar = document.querySelector("header .search-bar");
           if (searchBar) {
             searchBar.value = decodeURIComponent(query);
           }
@@ -53,7 +53,7 @@ function loadCommonResources() {
   };
 
   function loadSmoothScroll() {
-    // Smooth Scroll 
+    // Smooth Scroll
     return new Promise((resolve) => {
       const smoothScrollCssLink = document.createElement("link");
       smoothScrollCssLink.rel = "stylesheet";

@@ -48,7 +48,9 @@
   color: var(--color-secondary);
 }
 
-.loading, .error, .no-results {
+.loading,
+.error,
+.no-results {
   text-align: center;
   padding: 2rem;
   grid-column: 1 / -1;

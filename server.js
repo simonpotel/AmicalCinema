@@ -32,6 +32,17 @@ app.get('/api/movies/search', async (req, res) => {
     }
 });
 
+app.get('/api/movies/details', async (req, res) => {
+    try {
+        const { id } = req.query;
+        const results = await omdbAPI.getMovieDetails(id);
+        res.json(results);
+    } catch (error) {
+        console.error('error API:', error);
+        res.status(500).json({ error: 'Error when fetching movie details' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

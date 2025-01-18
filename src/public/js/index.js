@@ -1,23 +1,20 @@
 document.addEventListener("DOMContentLoaded", async () => {
   async function loadFeaturedMovies() {
     try {
-      const popularMovies = ["Titanic", "Logan", "Oppenheimer"]; // popular movies
+      const popularMovies = ["tt31433814", "tt1431045", "tt3896198"]; // Oppenheimer, Deadpool, Guardians of the Galaxy Vol. 2
       const moviesContainer = document.getElementById("featured-movies");
-      //moviesContainer.innerHTML = ""; // clear the movies container before loading new movies (atm doesnt need because we dont reload movies after DOM loaded)
 
       // request to the API to get the movies
-      const moviePromises = popularMovies.map(async (movieTitle) => {
-        const response = await fetch(
-          `/api/movies/search?query=${encodeURIComponent(movieTitle)}`
-        );
-        const data = await response.json(); 
-        return data.Search?.[0]; // return the first movie of the search
+      const moviePromises = popularMovies.map(async (movieId) => {
+        const response = await fetch(`/api/movies/details?id=${movieId}`);
+        const data = await response.json();
+        return data;
       });
 
-      const movies = await Promise.all(moviePromises); // wait for all the movies to be loaded
+      const movies = await Promise.all(moviePromises);
 
-      movies.forEach((movie) => { // for each movie
-        if (movie) {
+      movies.forEach((movie) => {
+        if (movie && movie.Response !== "False") {
           const movieCard = document.createElement("div");
           movieCard.className = "movie-card";
           movieCard.innerHTML = `
@@ -30,16 +27,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `;
 
-          movieCard.style.opacity = "0"; // set the opacity to 0
-          movieCard.style.transform = "translateY(20px)"; // set the transform to translateY(20px)
+          movieCard.style.opacity = "0";
+          movieCard.style.transform = "translateY(20px)";
 
           movieCard.addEventListener("click", () => {
-            window.location.href = `/search.html?query=${encodeURIComponent(
-              movie.Title
-            )}`; // redirect to the search page with the movie title
+            window.location.href = `/movie.html?id=${movie.imdbID}`;
           });
 
-          moviesContainer.appendChild(movieCard); // add the movie card to the movies container
+          moviesContainer.appendChild(movieCard);
 
           gsap.to(movieCard, {
             opacity: 1,
@@ -47,13 +42,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             duration: 0.6,
             delay: 0.2,
             ease: "power2.out",
-          }); // animate the movie card when it's loaded
+          });
         }
       });
     } catch (error) {
-      console.error("Error while loading movies:", error);
+      console.error("Erreur lors du chargement des films:", error);
     }
   }
 
-  loadFeaturedMovies(); // load the featured movies on the page
+  loadFeaturedMovies();
 });

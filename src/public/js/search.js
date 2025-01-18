@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const moviesGrid = document.getElementById("movies-grid"); // movies-grid
   let currentQuery =
     new URLSearchParams(window.location.search).get("query") || ""; // query in url
-  let currentPage = 1; 
-  let isLoading = false; 
+  let currentPage = 1;
+  let isLoading = false;
   let hasMoreResults = true; // api limit
 
   const waitForLenis = setInterval(() => {
@@ -34,15 +34,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentPage = 1;
     hasMoreResults = true;
 
-    if (query) { // if there is a query, scroll to the top
-      const lenis = window.lenis; 
-      lenis.scrollTo(0, { // scroll to the top
+    if (query) {
+      // if there is a query, scroll to the top
+      const lenis = window.lenis;
+      lenis.scrollTo(0, {
+        // scroll to the top
         duration: 0.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         onComplete: () => {
           searchMovies(query, 1);
           updateURL(query);
-        } // on complete, update url
+        }, // on complete, update url
       });
     } else {
       moviesGrid.innerHTML = ""; // clear movies grid
@@ -51,37 +53,47 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function searchMovies(query, page = 1) {
     try {
-      if (page === 1) { // if page is 1, clear movies grid
+      if (page === 1) {
+        // if page is 1, clear movies grid
         const children = Array.from(moviesGrid.children); // get children
-        if (children.length > 0) { // if there are children, animate them
+        if (children.length > 0) {
+          // if there are children, animate them
           gsap.to(children, {
             duration: 0.2,
             opacity: 0,
             onComplete: () => {
               moviesGrid.innerHTML = "";
-            }
+            },
           }); // animate children
-          
-          await new Promise(resolve => setTimeout(resolve, 200)); // wait for animation to complete to clear movies grid
+
+          await new Promise((resolve) => setTimeout(resolve, 200)); // wait for animation to complete to clear movies grid
         } else {
           moviesGrid.innerHTML = ""; // clear movies grid
         }
       }
 
       isLoading = true;
-      
+
       const requests = [
-        fetch(`/api/movies/search?query=${encodeURIComponent(query)}&page=${page * 2 - 1}`),
-        fetch(`/api/movies/search?query=${encodeURIComponent(query)}&page=${page * 2}`)
-      ]; // fetch two pages of results in parallel 
+        fetch(
+          `/api/movies/search?query=${encodeURIComponent(query)}&page=${
+            page * 2 - 1
+          }`
+        ),
+        fetch(
+          `/api/movies/search?query=${encodeURIComponent(query)}&page=${
+            page * 2
+          }`
+        ),
+      ]; // fetch two pages of results in parallel
 
       const responses = await Promise.all(requests); // wait for all requests to complete
-      const results = await Promise.all(responses.map(r => r.json())); // get results
+      const results = await Promise.all(responses.map((r) => r.json())); // get results
 
       const combinedMovies = []; // combined movies
       let totalResults = 0; // total results
 
-      results.forEach(data => {
+      results.forEach((data) => {
         if (data.Response === "True") {
           combinedMovies.push(...data.Search);
           totalResults = parseInt(data.totalResults);
@@ -94,7 +106,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         combinedMovies.forEach((movie, index) => {
           const card = createMovieCard(movie);
           moviesGrid.appendChild(card); // append movie card to movies grid
-
         });
       } else {
         if (page === 1) {
@@ -146,9 +157,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   function setupInfiniteScroll() {
     const lenis = window.lenis; // get lenis
 
-    lenis.on("scroll", ({ scroll, limit }) => { // on scroll
+    lenis.on("scroll", ({ scroll, limit }) => {
+      // on scroll
       const scrollPercentage = (scroll / limit) * 100; // get scroll percentage
-      if (scrollPercentage >= 80 && !isLoading && hasMoreResults && currentQuery) { // if scroll percentage is x% and there are more results and there is a query
+      if (
+        scrollPercentage >= 80 &&
+        !isLoading &&
+        hasMoreResults &&
+        currentQuery
+      ) {
+        // if scroll percentage is x% and there are more results and there is a query
         currentPage++; // increment current page
         searchMovies(currentQuery, currentPage); // search movies
       }
