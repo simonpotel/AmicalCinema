@@ -49,8 +49,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       const dvdDate = new Date(movie.DVD); // create dvd date
       const formattedDate = dvdDate.toLocaleDateString("fr-FR"); // format dvd date
       dvdElement.textContent = formattedDate; // set dvd date
+      dvdTitle.textContent = "Sortie DVD"; // set dvd title
     } else {
-      dvdElement.textContent = ""; // if no dvd date, set text to empty
+      dvdElement.textContent = "N/A"; // if no dvd date, set text to empty
     }
 
     gsap.from(".movie-content", {
