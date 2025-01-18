@@ -16,7 +16,35 @@ function loadCommonResources() {
     commonCssLink.href = "/css/common.css";
     head.appendChild(commonCssLink);
 
-    loadSmoothScroll().then(loadHeader);
+    // add loading class to body (so we got a fluid transition between pages)
+    document.body.classList.add('loading');
+
+    Promise.all([
+      loadSmoothScroll(), // load smooth scroll
+      loadHeader(), // load header
+      new Promise(resolve => {
+        if (document.readyState === 'complete') {
+          resolve(); // resolve promise
+        } else {
+          window.addEventListener('load', resolve); // if not complete, wait for load event
+        }
+      })
+    ]).then(() => {
+      // everything loaded, remove loading class
+      document.body.classList.remove('loading');
+
+      // if we are on search page, get query from url and set it to search bar
+      if (window.location.pathname === '/search.html') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query');
+        if (query) {
+          const searchBar = document.querySelector('header .search-bar');
+          if (searchBar) {
+            searchBar.value = decodeURIComponent(query);
+          }
+        }
+      }
+    });
   };
 
   function loadSmoothScroll() {
