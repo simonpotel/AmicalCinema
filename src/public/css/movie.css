@@ -6,7 +6,7 @@
 
 .movie-content {
   max-width: 1200px;
-  margin: 6rem auto 0;
+  margin: 1rem auto 0;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 4rem;
