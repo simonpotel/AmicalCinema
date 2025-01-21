@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
     } catch (error) {
-      console.error("Erreur lors du chargement des films:", error);
+      console.error("Error loading featured movies:", error);
     }
   }
 

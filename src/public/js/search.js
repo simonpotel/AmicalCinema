@@ -109,14 +109,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       } else {
         if (page === 1) {
-          moviesGrid.innerHTML = '<p class="no-results">Aucun résultat</p>';
+          moviesGrid.innerHTML = '<p class="no-results">No results</p>';
         }
         hasMoreResults = false; // no more results
       }
     } catch (error) {
       console.error("Error searching movies:", error);
       if (page === 1) {
-        moviesGrid.innerHTML = '<p class="error">Une erreur est survenue..</p>';
+        moviesGrid.innerHTML = '<p class="error">An error occurred..</p>';
       }
     } finally {
       isLoading = false;

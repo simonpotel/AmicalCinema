@@ -140,7 +140,7 @@ class ombdAPI {
             this.detailsCache.set(imdbId, response.data);
             return response.data; // return the data of the request
         } catch (error) {
-            console.error('Erreur lors de la récupération des détails du film:', error);
+            console.error('Error fetching movie details:', error);
             throw error;
         }
     }

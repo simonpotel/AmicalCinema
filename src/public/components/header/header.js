@@ -16,7 +16,7 @@ window.createHeader = () => {
   // search bar
   const searchBar = document.createElement("input");
   searchBar.type = "text";
-  searchBar.placeholder = "Rechercher un film";
+  searchBar.placeholder = "Search for a movie";
   searchBar.className = "search-bar";
 
   // search button (loop icon) in nav
