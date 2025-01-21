@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   async function loadFeaturedMovies() {
     try {
-      const popularMovies = ["tt0120338", "tt15398776", "tt3896198", "tt5463162"]; 
+      const popularMovies = ["tt13623148", "tt15398776", "tt3896198", "tt5463162"]; 
       const moviesContainer = document.getElementById("featured-movies");
 
       // request to the API to get the movies

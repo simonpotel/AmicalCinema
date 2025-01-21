@@ -43,7 +43,6 @@
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
   padding: 2rem;
-  width: 100%;
 }
 
 .movie-card {
