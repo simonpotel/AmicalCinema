@@ -14,6 +14,12 @@ function createFooter() {
             </a>
             <div class="footer-item">
                 <span class="footer-icon">🪴</span>
+                <div class="eco-popup">
+                    <h3>🌱 Eco-Friendly Website</h3>
+                    <p>this site minimizes resource usage with optimized API calls and caching</p>
+                    <p>movie data and posters are loaded externally and cached for efficiency</p>
+                    <p>fewer requests mean a greener web and faster load times!</p>
+                </div>
             </div>
     `;
 }
