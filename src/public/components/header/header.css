@@ -58,3 +58,36 @@ header img {
 input::placeholder {
   color: var(--color-secondary);
 }
+
+.suggestion-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1000;
+}
+
+.suggestion-container img {
+  height: 50px;
+  border-radius: 5px;
+}
+
+.suggestion-container h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+
+.suggestion-container p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+}

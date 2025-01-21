@@ -21,7 +21,7 @@ class ombdAPI {
         this.detailsCache = new Cache(CACHE_SIZE);
     }
 
-    async searchMovies(query, page = 1) {
+    async searchMovies(query, page = 1, onlyCache = false) {
         const cacheKey = `${query}-${page}`;
         
         // check if the query is in the cache
@@ -29,6 +29,13 @@ class ombdAPI {
             console.log('CACHE FOUND:', query, page);
             return this.searchCache.get(cacheKey);
         }
+
+        // if onlyCache is true and no cache found, return empty result
+        if (onlyCache) {
+            console.log('CACHE ONLY - NO RESULTS:', query, page);
+            return { Search: [], totalResults: "0", Response: "True" };
+        }
+
         console.log('REQUEST:', query, page);
 
         // structure of a request : BASE_URL + /?apikey=API_KEY&s=query&page=page

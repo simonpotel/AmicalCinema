@@ -30,23 +30,79 @@ window.createHeader = () => {
   `;
 
   const performSearch = () => {
-    // on searchButton click
-    const query = searchBar.value.trim(); // get query 
-    if (query) { // if query is not empty
-      if (window.location.pathname === '/search.html') { // if we are on search page 
-        const searchEvent = new CustomEvent('headerSearch', { detail: query });  // create event
-        document.dispatchEvent(searchEvent); // dispatch event
+    const query = searchBar.value.trim();
+    if (query) {
+      if (window.location.pathname === '/search.html') {
+        const searchEvent = new CustomEvent('headerSearch', { detail: query });
+        document.dispatchEvent(searchEvent);
       } else {
-        window.location.href = `/search.html?query=${encodeURIComponent(query)}`; // redirect to search page
+        window.location.href = `/search.html?query=${encodeURIComponent(query)}`;
       }
     }
   };
 
-  searchButton.addEventListener('click', performSearch); // on searchButton click -> perform search
+  searchButton.addEventListener('click', performSearch);
   
-  searchBar.addEventListener('keypress', (e) => { // on ENTER key press -> perform search
+  searchBar.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       performSearch();
+    }
+  });
+
+  let searchTimeout;
+
+  const showSuggestion = (movie) => {
+    const suggestionContainer = document.createElement('div');
+    suggestionContainer.className = 'suggestion-container';
+    suggestionContainer.style.cursor = 'pointer';
+    suggestionContainer.innerHTML = `
+      <img src="${movie.Poster}" alt="${movie.Title} Poster" />
+      <div>
+        <h3>${movie.Title}</h3>
+        <p>${movie.Plot.substring(0, 100)}...</p>
+      </div>
+    `;
+
+    suggestionContainer.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = `/movie.html?id=${movie.imdbID}`;
+    });
+
+    searchContainer.appendChild(suggestionContainer);
+
+    document.addEventListener('click', (e) => {
+      if (!suggestionContainer.contains(e.target)) {
+        suggestionContainer.remove();
+      }
+    }, { once: true });
+  };
+
+  const checkCacheAndSuggest = async (query) => {
+    try {
+      const response = await fetch(`/api/movies/search?query=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      if (data.Search && data.Search.length > 0) {
+        const movieDetails = await fetch(`/api/movies/details?id=${data.Search[0].imdbID}`);
+        const movie = await movieDetails.json();
+        showSuggestion(movie);
+      }
+    } catch (error) {
+      console.error('Error fetching suggestion:', error);
+    }
+  };
+
+  searchBar.addEventListener('input', () => {
+    const existingSuggestion = searchContainer.querySelector('.suggestion-container');
+    if (existingSuggestion) {
+      existingSuggestion.remove();
+    }
+    
+    clearTimeout(searchTimeout);
+    const query = searchBar.value.trim();
+    if (query.length >= 4) {
+      searchTimeout = setTimeout(() => {
+        checkCacheAndSuggest(query);
+      }, 200);
     }
   });
 
