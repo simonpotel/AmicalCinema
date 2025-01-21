@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amical Cinéma</title>
+    <title>Amical Cinema</title>
     <link rel="icon" href="/assets/logo.svg" />
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/movie.css" />
@@ -22,6 +22,7 @@
             <h1 id="title"></h1>
             <div class="movie-meta">
               <span id="year"></span>
+              <span id="rated"></span>
               <span id="runtime"></span>
             </div>
           </div>
@@ -32,24 +33,69 @@
               <p id="plot"></p>
             </div>
 
-            <div class="info-section">
-              <h3>Genre</h3>
-              <p id="genre"></p>
-            </div>
+            <div class="info-grid">
+              <div class="info-section">
+                <h3>Genre</h3>
+                <p id="genre"></p>
+              </div>
 
-            <div class="info-section">
-              <h3>Acteurs</h3>
-              <p id="actors"></p>
+              <div class="info-section">
+                <h3>Director</h3>
+                <p id="director"></p>
+              </div>
+
+              <div class="info-section">
+                <h3>Writer</h3>
+                <p id="writer"></p>
+              </div>
+
+              <div class="info-section">
+                <h3>Actors</h3>
+                <p id="actors"></p>
+              </div>
+
+              <div class="info-section">
+                <h3>Language</h3>
+                <p id="language"></p>
+              </div>
+
+              <div class="info-section">
+                <h3>Country</h3>
+                <p id="country"></p>
+              </div>
+
+              <div class="info-section">
+                <h3>Box Office</h3>
+                <p id="boxoffice"></p>
+              </div>
+
+              <div class="info-section">
+                <h3>Awards</h3>
+                <p id="awards"></p>
+              </div>
             </div>
 
             <div class="info-section ratings">
-              <h3>Notes</h3>
+              <h3>Ratings</h3>
               <div id="ratings"></div>
             </div>
 
             <div class="info-section">
-              <h3>Sortie DVD</h3>
-              <p id="dvd"></p>
+              <h3>Additional Informations</h3>
+              <div class="additional-info">
+                <div class="info-item">
+                  <span class="info-label">Released Date:</span>
+                  <span id="released"></span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">DVD Release Date:</span>
+                  <span id="dvd"></span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Production:</span>
+                  <span id="production"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
