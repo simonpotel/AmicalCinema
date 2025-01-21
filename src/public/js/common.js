@@ -27,6 +27,7 @@ function loadCommonResources() {
     Promise.all([
       loadSmoothScroll(), // load smooth scroll
       loadHeader(), // load header
+      loadFooter(), // load footer
       new Promise((resolve) => {
         if (document.readyState === "complete") {
           resolve(); // resolve promise
@@ -88,6 +89,25 @@ function loadCommonResources() {
         resolve();
       };
       document.body.appendChild(headerScript);
+    });
+  }
+
+  function loadFooter() {
+    return new Promise((resolve) => {
+      // Footer css
+      const footerCssLink = document.createElement("link");
+      footerCssLink.rel = "stylesheet";
+      footerCssLink.href = "/components/footer/footer.css";
+      head.appendChild(footerCssLink);
+
+      // Footer js
+      const footerScript = document.createElement("script");
+      footerScript.src = "/components/footer/footer.js";
+      footerScript.onload = () => {
+        createFooter();
+        resolve();
+      };
+      document.body.appendChild(footerScript);
     });
   }
 
