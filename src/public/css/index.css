@@ -48,7 +48,7 @@
 .movie-card {
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
   border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 2/3;
@@ -62,6 +62,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  transition: all 0.5s ease;
 }
 
 .movie-info {
@@ -77,6 +78,8 @@
     transparent 100%
   );
   color: var(--color-white);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
 }
 
 .movie-info h3 {
@@ -91,7 +94,17 @@
 }
 
 .movie-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
+
+.movie-card:hover .movie-info {
+  transform: translateY(0);
 }
 
 @media (max-width: 900px) {
