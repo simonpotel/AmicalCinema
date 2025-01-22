@@ -17,8 +17,8 @@ class ombdAPI {
                 apikey: API_KEY 
             }
         });
-        this.searchCache = new Cache(CACHE_SIZE);
-        this.detailsCache = new Cache(CACHE_SIZE);
+        this.searchCache = new Cache(CACHE_SIZE); // cache for search movies
+        this.detailsCache = new Cache(CACHE_SIZE); // cache for movie details
     }
 
     async searchMovies(query, page = 1, onlyCache = false, options = {}) {

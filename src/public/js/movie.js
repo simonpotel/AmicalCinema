@@ -4,33 +4,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   const movieContent = document.querySelector('.movie-content');
   const loader = document.getElementById('loader');
 
-  if (!movieId) {
-    window.location.href = "/";
+  if (!movieId) { // if the movie id is not found
+    window.location.href = "/"; // redirect to the home page
     return;
   }
 
-  const setContentOrHide = (elementId, content) => {
-    const element = document.getElementById(elementId);
-    if (!element) return;
+  const setContentOrHide = (elementId, content) => { // set the content or hide the element
+    const element = document.getElementById(elementId); // get the element
+    if (!element) return; // if the element is not found
     
-    const section = element.closest('.info-section');
-    if (!section) return;
+    const section = element.closest('.info-section'); // get the section
+    if (!section) return; // if the section is not found
     
     if (content === "N/A" || !content) {
       section.style.display = 'none';
     } else {
-      element.textContent = content;
-      section.style.display = '';
+      element.textContent = content; // set the content
+      section.style.display = ''; // show the section
     }
   };
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // abort the request after 5 seconds
 
     const response = await fetch(`/api/movies/details?id=${movieId}`, {
       signal: controller.signal
-    });
+    }); // fetch the movie details
     
     clearTimeout(timeoutId);
 
@@ -38,35 +38,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const movie = await response.json();
+    const movie = await response.json(); // get the movie details
 
     if (movie.Response === "False") {
       throw new Error("Movie not found in the database");
     }
 
-    if (!document.body.contains(movieContent)) {
-      return;
+    if (!document.body.contains(movieContent)) { // if the movie content is not found
+      return; // return
     }
 
-    document.getElementById("poster").src = movie.Poster !== "N/A" ? movie.Poster : "/assets/placeholder.jpg";
-    document.getElementById("poster").alt = movie.Title;
-    document.getElementById("title").textContent = movie.Title;
+    document.getElementById("poster").src = movie.Poster !== "N/A" ? movie.Poster : "/assets/placeholder.jpg"; // set the poster
+    document.getElementById("poster").alt = movie.Title; // set the alt text
+    document.getElementById("title").textContent = movie.Title; // set the title
 
-    const metaElements = {
+    const metaElements = { // set the meta elements
       year: movie.Year,
       rated: movie.Rated,
       runtime: movie.Runtime
     };
 
     Object.entries(metaElements).forEach(([id, value]) => {
-      const element = document.getElementById(id);
+      const element = document.getElementById(id); // get the element
       if (!element) return;
       
       if (value === "N/A" || !value) {
-        element.style.display = 'none';
+        element.style.display = 'none'; // hide the element
       } else {
-        element.textContent = value;
-        element.style.display = '';
+        element.textContent = value; // set the content
+        element.style.display = ''; // show the element
       }
     });
 
@@ -80,40 +80,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     setContentOrHide("boxoffice", movie.BoxOffice);
     setContentOrHide("awards", movie.Awards);
 
-    const ratingsContainer = document.getElementById("ratings");
-    if (ratingsContainer) {
-      const ratingsSection = ratingsContainer.closest('.info-section');
-      if (ratingsSection && movie.Ratings && movie.Ratings.length > 0) {
+    const ratingsContainer = document.getElementById("ratings"); // get the ratings container
+    if (ratingsContainer) { // if the ratings container is found
+      const ratingsSection = ratingsContainer.closest('.info-section'); // get the ratings section
+      if (ratingsSection && movie.Ratings && movie.Ratings.length > 0) { // if the ratings section is found and there are ratings
         ratingsContainer.innerHTML = '';
         movie.Ratings.forEach((rating) => {
-          const ratingElement = document.createElement("div");
-          ratingElement.className = "rating-item";
+          const ratingElement = document.createElement("div"); // create a rating element
+          ratingElement.className = "rating-item"; 
           ratingElement.innerHTML = `
             <span class="rating-source">${rating.Source}</span>
             <span class="rating-value">${rating.Value}</span>
           `;
-          ratingsContainer.appendChild(ratingElement);
+          ratingsContainer.appendChild(ratingElement); // append the rating element
         });
-        ratingsSection.style.display = '';
-      } else if (ratingsSection) {
-        ratingsSection.style.display = 'none';
+        ratingsSection.style.display = ''; // show the ratings section
+      } else if (ratingsSection) { // if the ratings section is found
+        ratingsSection.style.display = 'none'; // hide the ratings section
       }
     }
 
-    const additionalInfos = {
+    const additionalInfos = { // set the additional infos
       released: movie.Released,
       dvd: movie.DVD,
       production: movie.Production
     };
 
     Object.entries(additionalInfos).forEach(([id, value]) => {
-      const element = document.getElementById(id);
-      if (!element) return;
+      const element = document.getElementById(id); // get the element
+      if (!element) return; // if the element is not found
       
-      const infoItem = element.closest('.info-item');
-      if (!infoItem) return;
+      const infoItem = element.closest('.info-item'); // get the info item
+      if (!infoItem) return; // if the info item is not found 
       
-      if (value === "N/A" || !value) {
+      if (value === "N/A" || !value) {  
         infoItem.style.display = 'none';
       } else {
         element.textContent = value;
