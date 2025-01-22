@@ -23,8 +23,9 @@ app.get('/search', (req, res) => {
 
 app.get('/api/movies/search', async (req, res) => {
     try {
-        const { query, page, onlyCache } = req.query;
-        const results = await omdbAPI.searchMovies(query, page, onlyCache === 'true');
+        const { query, s, type, y, page, onlyCache } = req.query;
+        const searchQuery = s || query;
+        const results = await omdbAPI.searchMovies(searchQuery, page, onlyCache === 'true', { type, y });
         res.json(results);
     } catch (error) {
         console.error('error API:', error);

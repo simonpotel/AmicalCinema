@@ -21,8 +21,9 @@ class ombdAPI {
         this.detailsCache = new Cache(CACHE_SIZE);
     }
 
-    async searchMovies(query, page = 1, onlyCache = false) {
-        const cacheKey = `${query}-${page}`;
+    async searchMovies(query, page = 1, onlyCache = false, options = {}) {
+        const { type, y } = options;
+        const cacheKey = `${query}-${page}-${type || ''}-${y || ''}`;
         
         // check if the query is in the cache
         if (this.searchCache.has(cacheKey)) {
@@ -36,7 +37,7 @@ class ombdAPI {
             return { Search: [], totalResults: "0", Response: "True" };
         }
 
-        console.log('REQUEST:', query, page);
+        console.log('REQUEST:', query, page, type, y);
 
         // structure of a request : BASE_URL + /?apikey=API_KEY&s=query&page=page
         // exemple of request : BASE_URL + /?apikey=API_KEY&s=Guardians of the Galaxy&page=1
@@ -65,7 +66,9 @@ class ombdAPI {
             const response = await this.axios.get('', {
                 params: {
                     s: query,
-                    page: page
+                    page: page,
+                    type: type,
+                    y: y
                 } 
             });
             
