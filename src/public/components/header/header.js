@@ -1,5 +1,5 @@
 window.createHeader = () => {
-  const header = document.createElement("header");
+  const header = document.querySelector("header");
   // create the header with the logo and the search bar
   header.innerHTML = `
     <a href="./">
