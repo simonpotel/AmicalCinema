@@ -74,44 +74,33 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       isLoading = true;
 
-      const requests = [
-        fetch(
-          `/api/movies/search?query=${encodeURIComponent(query)}&page=${
-            page * 2 - 1
-          }` // fetch the first page of results
-        ),
-        fetch(
-          `/api/movies/search?query=${encodeURIComponent(query)}&page=${
-            page * 2
-          }` // fetch the second page of results
-        ),
-      ]; // fetch two pages of results in parallel
+      const response = await fetch(
+        `/api/movies/search?query=${encodeURIComponent(query)}&page=${page}`
+      );
+      const data = await response.json();
 
-      const responses = await Promise.all(requests); // wait for all requests to complete
-      const results = await Promise.all(responses.map((r) => r.json())); // get results
+      if (data.Response === "True") {
+        const movies = data.Search;
+        const totalResults = parseInt(data.totalResults);
 
-      const combinedMovies = []; // combined movies
-      let totalResults = 0; // total results
+        if (movies.length > 0) {
+          hasMoreResults = page * 10 < totalResults;
 
-      results.forEach((data) => {
-        if (data.Response === "True") {
-          combinedMovies.push(...data.Search);
-          totalResults = parseInt(data.totalResults);
+          movies.forEach((movie) => {
+            const card = createMovieCard(movie);
+            moviesGrid.appendChild(card);
+          });
+        } else {
+          if (page === 1) {
+            moviesGrid.innerHTML = '<p class="no-results">No results</p>';
+          }
+          hasMoreResults = false;
         }
-      }); // combine results
-
-      if (combinedMovies.length > 0) {
-        hasMoreResults = page * 20 < totalResults; // check if there are more results
-
-        combinedMovies.forEach((movie, index) => {
-          const card = createMovieCard(movie);
-          moviesGrid.appendChild(card); // append movie card to movies grid
-        });
       } else {
         if (page === 1) {
           moviesGrid.innerHTML = '<p class="no-results">No results</p>';
         }
-        hasMoreResults = false; // no more results
+        hasMoreResults = false;
       }
     } catch (error) {
       console.error("Error searching movies:", error);
@@ -161,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // on scroll
       const scrollPercentage = (scroll / limit) * 100; // get scroll percentage
       if (
-        scrollPercentage >= 80 &&
+        scrollPercentage >= 90 &&
         !isLoading &&
         hasMoreResults &&
         currentQuery
