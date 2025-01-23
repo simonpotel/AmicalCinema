@@ -9,98 +9,101 @@
     <link rel="stylesheet" href="/css/movie.css" />
   </head>
   <body>
-    <div id="movie-container">
-      <div id="loader" class="loader">
-        <div class="spinner"></div>
-      </div>
-      <div class="movie-content">
-        <div class="movie-poster">
-          <img id="poster" src="" alt="Movie Poster" />
+    <header></header>
+    <main>
+      <div id="movie-container">
+        <div id="loader" class="loader">
+          <div class="spinner"></div>
         </div>
-        <div class="movie-details">
-          <div class="movie-header">
-            <h1 id="title"></h1>
-            <div class="movie-meta">
-              <span id="year"></span>
-              <span id="rated"></span>
-              <span id="runtime"></span>
+        <div class="movie-content">
+          <div class="movie-poster">
+            <img id="poster" src="" alt="Movie Poster" />
+          </div>
+          <div class="movie-details">
+            <div class="movie-header">
+              <h1 id="title"></h1>
+              <div class="movie-meta">
+                <span id="year"></span>
+                <span id="rated"></span>
+                <span id="runtime"></span>
+              </div>
+            </div>
+
+            <div class="movie-info">
+              <div class="info-section">
+                <h3>Synopsis</h3>
+                <p id="plot"></p>
+              </div>
+
+              <div class="info-grid">
+                <div class="info-section">
+                  <h3>Genre</h3>
+                  <p id="genre"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Director</h3>
+                  <p id="director"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Writer</h3>
+                  <p id="writer"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Actors</h3>
+                  <p id="actors"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Language</h3>
+                  <p id="language"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Country</h3>
+                  <p id="country"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Box Office</h3>
+                  <p id="boxoffice"></p>
+                </div>
+
+                <div class="info-section">
+                  <h3>Awards</h3>
+                  <p id="awards"></p>
+                </div>
+              </div>
+
+              <div class="info-section ratings">
+                <h3>Ratings</h3>
+                <div id="ratings"></div>
+              </div>
+
+              <div class="info-section">
+                <h3>Additional Informations</h3>
+                <div class="additional-info">
+                  <div class="info-item">
+                    <span class="info-label">Released Date:</span>
+                    <span id="released"></span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">DVD Release Date:</span>
+                    <span id="dvd"></span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">Production:</span>
+                    <span id="production"></span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="movie-info">
-            <div class="info-section">
-              <h3>Synopsis</h3>
-              <p id="plot"></p>
-            </div>
-
-            <div class="info-grid">
-              <div class="info-section">
-                <h3>Genre</h3>
-                <p id="genre"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Director</h3>
-                <p id="director"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Writer</h3>
-                <p id="writer"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Actors</h3>
-                <p id="actors"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Language</h3>
-                <p id="language"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Country</h3>
-                <p id="country"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Box Office</h3>
-                <p id="boxoffice"></p>
-              </div>
-
-              <div class="info-section">
-                <h3>Awards</h3>
-                <p id="awards"></p>
-              </div>
-            </div>
-
-            <div class="info-section ratings">
-              <h3>Ratings</h3>
-              <div id="ratings"></div>
-            </div>
-
-            <div class="info-section">
-              <h3>Additional Informations</h3>
-              <div class="additional-info">
-                <div class="info-item">
-                  <span class="info-label">Released Date:</span>
-                  <span id="released"></span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">DVD Release Date:</span>
-                  <span id="dvd"></span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">Production:</span>
-                  <span id="production"></span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
+    </main>
     <footer></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

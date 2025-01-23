@@ -91,3 +91,39 @@ input::placeholder {
   font-size: 0.9rem;
   color: var(--color-secondary);
 }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    
+    padding: 0.5rem 1rem;
+  }
+
+  .search-container {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .search-bar {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .search-button {
+    right: 5px;
+  }
+
+  .suggestion-container {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .suggestion-container h3 {
+    font-size: 1rem;
+  }
+
+  .suggestion-container p {
+    font-size: 0.8rem;
+  }
+}
