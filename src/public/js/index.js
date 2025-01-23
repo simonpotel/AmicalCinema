@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         "heart",
         "time",
         "journey",
-      ];
+      ]; // API doesn't support only search by year of release ; so I took an array of search terms thats most of the films of 2024 has these words in their title
+      // and I'm using the current page to get the next search term
       const searchTerm = searchTerms[currentPage % searchTerms.length];
       const response = await fetch(
         `/api/movies/search?s=${searchTerm}&type=movie&y=2024&page=1`
