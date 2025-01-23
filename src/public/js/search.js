@@ -78,12 +78,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         fetch(
           `/api/movies/search?query=${encodeURIComponent(query)}&page=${
             page * 2 - 1
-          }`
+          }` // fetch the first page of results
         ),
         fetch(
           `/api/movies/search?query=${encodeURIComponent(query)}&page=${
             page * 2
-          }`
+          }` // fetch the second page of results
         ),
       ]; // fetch two pages of results in parallel
 

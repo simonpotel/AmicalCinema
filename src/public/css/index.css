@@ -26,12 +26,14 @@
   margin: 0 auto;
 }
 
-#trend, #recent-section {
+#trend,
+#recent-section {
   width: 100%;
   max-width: 1400px;
 }
 
-#trend h2, #recent-section h2 {
+#trend h2,
+#recent-section h2 {
   font-size: 1.8rem;
   margin-bottom: 2rem;
   color: var(--color-primary);
@@ -55,14 +57,15 @@
   background-color: var(--background-color-secondary);
   max-width: 500px;
   margin: 0 auto;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .movie-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
 
 .movie-info {
@@ -94,7 +97,7 @@
 }
 
 .movie-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-4px) scale(1.02) translateZ(0);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -172,8 +175,12 @@
 }
 
 @keyframes spin {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 #recent-section {
