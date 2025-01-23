@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => { 
+document.addEventListener("DOMContentLoaded", async () => {
   let currentPage = 1;
   let isLoading = false;
 
@@ -10,25 +10,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       // request to the API to get the movies
       const moviePromises = popularMovies.map(async (movieId) => {
         const response = await fetch(`/api/movies/details?id=${movieId}`);
-        const data = await response.json(); // get the data
-        return data; // return the data
+        const data = await response.json();
+        return data;
       });
 
-      const movies = await Promise.all(moviePromises); // wait for all the movies to be fetched
+      const movies = await Promise.all(moviePromises);
 
       movies.forEach((movie) => {
         if (movie && movie.Response !== "False") {
-          const movieCard = createMovieCard(movie); // create a movie card
-          moviesContainer.appendChild(movieCard); // append the movie card
+          const movieCard = createMovieCard(movie);
+          moviesContainer.appendChild(movieCard);
         }
       });
     } catch (error) {
-      console.error("Error loading featured movies:", error); // error
+      console.error("Error loading featured movies:", error);
     }
   }
 
   function createMovieCard(movie) {
-    const movieCard = document.createElement("div"); // create a movie card
+    const movieCard = document.createElement("div");
+    movieCard.className = "movie-card";
     movieCard.innerHTML = `
       <img src="${
         movie.Poster !== "N/A" ? movie.Poster : "/assets/placeholder.jpg"
@@ -39,19 +40,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-    movieCard.style.opacity = "0"; // set the opacity
-    movieCard.style.transform = "translateY(20px)"; // set the transform  
+    movieCard.style.opacity = "0";
+    movieCard.style.transform = "translateY(20px)";
 
     movieCard.addEventListener("click", () => {
-      window.location.href = `/movie.html?id=${movie.imdbID}`; // redirect to the movie page
+      window.location.href = `/movie.html?id=${movie.imdbID}`;
     });
 
     gsap.to(movieCard, {
-      opacity: 1, // set the opacity
-      y: 0, // set the y
-      duration: 0.6, // set the duration
-      delay: 0.2, // set the delay
-      ease: "power2.out", // set the ease
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      delay: 0.2,
+      ease: "power2.out",
     });
 
     return movieCard;
@@ -61,41 +62,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isLoading) return;
     
     try {
-      isLoading = true; // set the loading state
+      isLoading = true;
       const loadMoreButton = document.getElementById("load-more-button");
-      loadMoreButton.classList.add("loading"); // add the loading class
+      loadMoreButton.classList.add("loading");
       
       const searchTerms = ["love", "man", "day", "night", "world", "life", "girl", "story", "war", "death", "city", "dream", "heart", "time", "journey"];      const searchTerm = searchTerms[currentPage % searchTerms.length];
-      const response = await fetch(`/api/movies/search?s=${searchTerm}&type=movie&y=2024&page=1`); // request to the API to get the movies
-      const data = await response.json(); // get the data
+      const response = await fetch(`/api/movies/search?s=${searchTerm}&type=movie&y=2024&page=1`);
+      const data = await response.json();
 
       if (data.Search && data.Search.length > 0) {
         const recentMoviesContainer = document.getElementById("recent-movies");
-
+        
         data.Search.forEach((movie) => {
-          const movieCard = createMovieCard(movie); // create a movie card
-          recentMoviesContainer.appendChild(movieCard); // append the movie card
+          const movieCard = createMovieCard(movie);
+          recentMoviesContainer.appendChild(movieCard);
         });
 
-        currentPage++; // increment the current page
+        currentPage++;
         
-        if (currentPage * 10 >= parseInt(data.totalResults)) { // if the current page is greater than the total results
-          loadMoreButton.style.display = "none"; // hide the load more button
+        if (currentPage * 10 >= parseInt(data.totalResults)) {
+          loadMoreButton.style.display = "none";
         }
       } else {
-        loadMoreButton.style.display = "none"; // hide the load more button
+        loadMoreButton.style.display = "none";
       }
     } catch (error) {
       console.error("Error loading recent movies:", error);
     } finally {
-      isLoading = false; // set the loading state
+      isLoading = false;
       const loadMoreButton = document.getElementById("load-more-button");
-      loadMoreButton.classList.remove("loading"); // remove the loading class
+      loadMoreButton.classList.remove("loading");
     }
   }
 
-  loadFeaturedMovies(); // load the featured movies
+  loadFeaturedMovies();
   
-  document.getElementById("load-more-button").addEventListener("click", loadRecentMovies); // add an event listener to the load more button
-  loadRecentMovies(); // load the recent movies
+  document.getElementById("load-more-button").addEventListener("click", loadRecentMovies);
+  loadRecentMovies();
 });
