@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadFeaturedMovies() {
     try {
-      const popularMovies = ["tt13623148", "tt15398776", "tt3896198", "tt5463162"]; 
+      const popularMovies = [
+        "tt13623148",
+        "tt15398776",
+        "tt3896198",
+        "tt5463162",
+      ];
       const moviesContainer = document.getElementById("featured-movies");
 
       // request to the API to get the movies
@@ -19,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       movies.forEach((movie) => {
         if (movie && movie.Response !== "False") {
           const movieCard = createMovieCard(movie);
-          moviesContainer.appendChild(movieCard);
+          moviesContainer.appendChild(movieCard); // add the movie card to the container
         }
       });
     } catch (error) {
@@ -60,26 +65,45 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadRecentMovies() {
     if (isLoading) return;
-    
+
     try {
       isLoading = true;
       const loadMoreButton = document.getElementById("load-more-button");
       loadMoreButton.classList.add("loading");
-      
-      const searchTerms = ["love", "man", "day", "night", "world", "life", "girl", "story", "war", "death", "city", "dream", "heart", "time", "journey"];      const searchTerm = searchTerms[currentPage % searchTerms.length];
-      const response = await fetch(`/api/movies/search?s=${searchTerm}&type=movie&y=2024&page=1`);
+
+      const searchTerms = [
+        "love",
+        "man",
+        "day",
+        "night",
+        "world",
+        "life",
+        "girl",
+        "story",
+        "war",
+        "death",
+        "city",
+        "dream",
+        "heart",
+        "time",
+        "journey",
+      ];
+      const searchTerm = searchTerms[currentPage % searchTerms.length];
+      const response = await fetch(
+        `/api/movies/search?s=${searchTerm}&type=movie&y=2024&page=1`
+      );
       const data = await response.json();
 
       if (data.Search && data.Search.length > 0) {
         const recentMoviesContainer = document.getElementById("recent-movies");
-        
+
         data.Search.forEach((movie) => {
           const movieCard = createMovieCard(movie);
           recentMoviesContainer.appendChild(movieCard);
         });
 
         currentPage++;
-        
+
         if (currentPage * 10 >= parseInt(data.totalResults)) {
           loadMoreButton.style.display = "none";
         }
@@ -96,7 +120,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   loadFeaturedMovies();
-  
-  document.getElementById("load-more-button").addEventListener("click", loadRecentMovies);
+
+  document
+    .getElementById("load-more-button")
+    .addEventListener("click", loadRecentMovies);
   loadRecentMovies();
 });

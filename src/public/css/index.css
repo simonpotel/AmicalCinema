@@ -26,12 +26,14 @@
   margin: 0 auto;
 }
 
-#trend, #recent-section {
+#trend,
+#recent-section {
   width: 100%;
   max-width: 1400px;
 }
 
-#trend h2, #recent-section h2 {
+#trend h2,
+#recent-section h2 {
   font-size: 1.8rem;
   margin-bottom: 2rem;
   color: var(--color-primary);
@@ -173,8 +175,12 @@
 }
 
 @keyframes spin {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 #recent-section {

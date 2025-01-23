@@ -92,7 +92,7 @@ footer {
 }
 
 .eco-popup::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 50%;
@@ -103,7 +103,8 @@ footer {
   border-radius: 2px;
 }
 
-.eco-popup h3, .eco-popup p {
+.eco-popup h3,
+.eco-popup p {
   color: var(--color-primary);
   font-size: 0.9rem;
 }
