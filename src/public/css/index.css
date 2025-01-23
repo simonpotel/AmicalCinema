@@ -55,14 +55,15 @@
   background-color: var(--background-color-secondary);
   max-width: 500px;
   margin: 0 auto;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .movie-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
 
 .movie-info {
@@ -94,7 +95,7 @@
 }
 
 .movie-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-4px) scale(1.02) translateZ(0);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
