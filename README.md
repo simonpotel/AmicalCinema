@@ -1,4 +1,5 @@
-# monCine
+# AmicalCinéma
+<img src="https://github.com/simonpotel/AmicalCinema/blob/master/src/public/assets/logo.svg">
 
 > [!TIP]
 > Projet pour le module 1WEBD de SUPINFO.
